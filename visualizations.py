@@ -9,11 +9,14 @@ import plotly.express as px
 def speed_vs_injuries(df):
     """Interactive box plot - speed limit vs injury count - colored by weather"""
 
-    plot_df = df.dropna(subset=['SPEED_LIMIT']).copy()
+    # dropping the nulls/NaNs in the speed limit column
+    plot_df = df.dropna(subset = ['SPEED_LIMIT']).copy()
     valid_speeds = [20, 25, 30, 35, 40, 45, 50, 55, 65]
     plot_df = plot_df[plot_df['SPEED_LIMIT'].isin(valid_speeds)]
 
     plot_df['TOTAL_INJURIES'] = plot_df['NUMB_NONFATAL_INJR'] + plot_df['NUMB_FATAL_INJR']
+
+    # so we have even spacing on the x axis
     plot_df['SPEED_LIMIT'] = plot_df['SPEED_LIMIT'].astype(int).astype(str)
 
     fig = px.box(
@@ -35,7 +38,7 @@ def speed_vs_injuries(df):
             'Clear': 'blue',
             'Cloudy': 'gray',
             'Rain': 'green',
-            'Snow/Ice': 'cyan',
+            'Snow/Ice': 'purple',
             'Fog': 'orange',
             'Other': 'brown'
         }
