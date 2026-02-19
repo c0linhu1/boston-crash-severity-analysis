@@ -1,3 +1,8 @@
+import pandas as pd
+import numpy as np
+import altair as alt
+import matplotlib.pyplot as plt
+import plotly.express as px
 
 # heatmap
 def hour_vs_day_heatmap(df):
@@ -70,3 +75,4 @@ def hour_vs_day_heatmap(df):
         color = 'independent'
     )
     combined.save('hour_vs_day_heatmap.html')
+
