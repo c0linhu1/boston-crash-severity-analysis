@@ -69,6 +69,7 @@ def create_grouped_bar():
     )
 
     fig.show()
+    fig.write_html('grouped_bar.html')
 
 
 if __name__ == '__main__':

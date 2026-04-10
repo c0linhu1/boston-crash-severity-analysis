@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crash Severity in Boston — DS4200</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fff;
+            color: #222;
+            line-height: 1.75;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .authors {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #c23b22;
+        }
+
+        h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2.5rem 0 0.75rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        h2:first-of-type { border-top: none; padding-top: 0; }
+
+        p {
+            color: #444;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        a { color: #c23b22; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .viz-wide {
+            width: 75vw;
+            margin-left: calc(-40vw + 50%);
+            padding: 0 1rem;
+        }
+
+        .viz-frame {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 400px;
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .takeaway {
+            background: #fdf5f3;
+            border-left: 3px solid #c23b22;
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0 1.25rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .interact {
+            background: #f3f7fb;
+            border-left: 3px solid #2c7bb6;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0 1.25rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.85rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { color: #888; font-weight: 500; }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <p class="subtitle">DS4200 — Information Presentation and Data Visualization</p>
+    <h1>What Environmental Factors Contribute to Crash Severity in Boston?</h1>
+    <p class="authors">Colin Hui &middot; Advay Vallabhapurapu &middot; Matthieu Schiermeier</p>
+
+    <!-- INTRODUCTION -->
+    <h2>Introduction</h2>
+    <p>
+        Motor vehicle crashes remain a leading cause of injury and death in the United States, and Boston is no exception. 
+        Understanding and acknowledging the factors that contribute to crash severity, rather than just crash occurrence 
+        is important for informing road safety policy and public awareness campaigns. 
+        Although many studies have examined crash frequency, few have focused specifically 
+        on what makes a given crash more or less severe. 
+
+    </p>
+    <p>
+        The project will focus on the relationships among environmental and weather conditions and their impacts on crash severity outcomes in Boston. 
+        By analyzing 2025 crash records, we aim to identify and visualize the factor combinations most strongly 
+        associated with serious injuries and deaths, providing insights for safety advocates and transportation planners.
+    </p>
+
+    <!-- DATA -->
+    <h2>Data</h2>
+    <p>
+        Our dataset consists of motor vehicle crash records from Boston during January 2025, sourced from the
+        <a href="https://apps.crashdata.dot.mass.gov/cdp/home" target="_blank">MassDOT crash database</a>.
+        After cleaning, the dataset contains approximately 3,500 observations with 23 features including crash severity,
+        weather, road surface, lighting, time of day, collision type, speed limit, and geographic coordinates.
+    </p>
+    <p>
+        A binary severity variable was created: crashes involving any injury or fatality are "Severe," while
+        property-damage-only crashes are "Non-Severe."
+    </p>
+
+    <table>
+        <tr><th>Feature</th><th>Categories</th></tr>
+        <tr><td>Weather</td><td>Clear, Rain, Snow/Ice, Cloudy, Fog</td></tr>
+        <tr><td>Road Surface</td><td>Dry, Wet, Snow/Ice</td></tr>
+        <tr><td>Lighting</td><td>Daylight, Dark–Lighted, Dark–Unlighted, Dawn/Dusk</td></tr>
+        <tr><td>Severity</td><td>Severe (injury/fatal), Non-Severe (property damage only)</td></tr>
+    </table>
+
+    <p><strong>References:</strong></p>
+    <p>
+        Qiu & Nixon, <a href="https://www.researchgate.net/publication/245562700" target="_blank">"Effects of Adverse Weather on Traffic Crashes"</a>, <em>Transportation Research Record</em>, 2008.<br>
+        Brijs et al., <a href="https://pubmed.ncbi.nlm.nih.gov/28432882/" target="_blank">"Factors Affecting Severity of Crashes in Urban Intersections"</a>, <em>Accident Analysis & Prevention</em>, 2017.
+    </p>
+
+    <!-- VIZ 1: Stacked Bar -->
+    <h2>Crash Severity Breakdown by Weather</h2>
+    <div class="placeholder">Stacked Bar Chart</div>
+
+
+    <!-- VIZ 2: Heatmap -->
+    <h2>Crash Frequency by Hour and Day of Week</h2>
+    <div class="placeholder">Heatmap</div>
+    <div class="takeaway"><strong>Takeaway:</strong> [To be added]</div>
+  
+
+    <!-- VIZ 3: Map -->
+    <h2>Geographic Distribution of Severe Crashes</h2>
+    <div class="placeholder">Interactive Map)</div>
+
+
+    <!-- VIZ 4: Grouped Bar -->
+    <h2>Severity Rate by Weather and Lighting</h2>
+    <div class="viz-wide">
+        <iframe class="viz-frame" src="grouped_bar.html"></iframe>
+    </div>
+    <div class = "takeaway"></strong>Crash severity rates seem to remain relatively consistent 
+        across the differnet weather and lighting conditions, as across all conditions the severity 
+        rate ranges from ~30–40%. Something that interesting that viewers see from this visualization
+        is that clear weather does not seem to correspond to lower severity. Severity rates during 
+        clear conditions are actually comparable to or higher than those during adverse weather.
+        This may suggest that drivers may be more careless when conditions appear safe. Furthermore, Snow/Ice 
+        conditions show the most variation across lighting types. This shows that visibility may play a greater
+        role when road surfaces are already dangerous.</div>
+   
+
+    <!-- visualization 5: Line Chart -->
+    <h2>Crash Trends by Weather Over Time</h2>
+    <div class="placeholder">Line Chart</div>
+    <div class="takeaway"><strong>Takeaway:</strong> [To be added]</div>
+
+    <!-- conclusion -->
+    <h2>Conclusion</h2>
+    <p>[ 2–3 key findings about which environmental factors most contribute to crash severity in Boston.]</p>
+    <p>[limitations and future work.]</p>
+
+
+</body>
+</html>
