@@ -16,11 +16,11 @@ def create_heatmap(df):
     # ordered days for the y axis
     day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-    # ---- Interactive selection: click a day on the top heatmap to filter the bottom ----
+    # Interactive selection: click a day on the top heatmap to filter the bottom 
     day_selection = alt.selection_point(fields=['DAY_OF_WEEK'], empty='all')
     hour_selection = alt.selection_interval(encodings=['x'], empty='all')
 
-    # ---- Top heatmap: crash count with interval selection on hours ----
+    # Top heatmap: crash count with interval selection on hours 
     crash_count_heatmap = alt.Chart(agg).mark_rect().encode(
         x=alt.X('HOUR:O',
                  title='Hour of Day (0 = Midnight)',
