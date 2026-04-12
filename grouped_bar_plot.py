@@ -80,12 +80,19 @@ def create_grouped_bar():
             method='update',
             args=[
                 {'visible': visibility, 'showlegend': legend_updates},
-                {'title': f'Crash Severity Rate by Weather and Lighting — Boston (Jan 2025)<br><sup>Road Surface: {label}</sup>'}
+                {'title': f'Crash Severity Rate by Weather and Lighting — Boston (2025)<br><sup>Road Surface: {label}</sup>'}
             ]
         ))
 
     fig.update_layout(
-        title='Crash Severity Rate by Weather and Lighting Conditions — Boston (Jan 2025)',
+        title=dict(
+            text='Crash Severity Rate by Weather and Lighting Conditions — Boston (2025)',
+            font=dict(size=18),
+            x=0.5,
+            xanchor='center',
+            y=0.98,
+            yanchor='top'
+        ),
         xaxis_title='Weather Condition',
         yaxis_title='Severity Rate (%)',
         barmode='group',
@@ -95,6 +102,7 @@ def create_grouped_bar():
         plot_bgcolor='#f9f9f9',
         legend_title_text='Lighting Condition',
         yaxis=dict(range=[0, 100]),
+        margin=dict(t=120, b=60, l=70, r=70),
         updatemenus=[
             dict(
                 buttons=buttons,
@@ -102,7 +110,7 @@ def create_grouped_bar():
                 showactive=True,
                 x=0.02,
                 xanchor='left',
-                y=1.15,
+                y=1.22,
                 yanchor='top',
                 bgcolor='white',
                 bordercolor='#ccc',
@@ -114,7 +122,7 @@ def create_grouped_bar():
         annotations=[
             dict(
                 text='Road Surface:',
-                x=0.02, y=1.18,
+                x=0.02, y=1.25,
                 xref='paper', yref='paper',
                 showarrow=False,
                 font=dict(size=12, color='#555'),
