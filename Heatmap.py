@@ -51,7 +51,7 @@ def create_heatmap(df):
         day_selection
     )
 
-    # ---- Bottom heatmap: injury rate, filtered by selections from top ----
+    # Bottom heatmap: injury rate, filtered by selections from top 
     injury_rate_heatmap = alt.Chart(agg).mark_rect().encode(
         x=alt.X('HOUR:O',
                  title='Hour of Day (0 = Midnight)',
