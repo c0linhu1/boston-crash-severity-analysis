@@ -105,7 +105,7 @@ def simplify_light(l):
 def main():
 
     df = get_data()
-    df.to_csv('cleaned_boston_crashes.csv')
+    df.to_csv('cleaned_boston_crashes.csv', index = False)
     print('saved to cleaned_boston_crashes.csv')
     print(df.shape)
     
