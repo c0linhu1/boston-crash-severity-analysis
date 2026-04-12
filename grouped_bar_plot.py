@@ -97,7 +97,7 @@ def create_grouped_bar():
         yaxis_title='Severity Rate (%)',
         barmode='group',
         font=dict(size=12),
-        height=800,
+        height=650,
         width=1000,
         plot_bgcolor='white',
         legend_title_text='Lighting Condition',
@@ -110,7 +110,7 @@ def create_grouped_bar():
                 showactive=True,
                 x=0.02,
                 xanchor='left',
-                y=1.5,
+                y=1.2,
                 yanchor='top',
                 bgcolor='white',
                 bordercolor='#ccc',
@@ -122,7 +122,7 @@ def create_grouped_bar():
         annotations=[
             dict(
                 text='Road Surface:',
-                x=0.02, y=1.55,
+                x=0.02, y=1.25,
                 xref='paper', yref='paper',
                 showarrow=False,
                 font=dict(size=12, color='#555'),
