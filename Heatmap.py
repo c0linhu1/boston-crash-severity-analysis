@@ -1,15 +1,11 @@
-import pandas as pd
-import numpy as np
-import altair as alt
-import matplotlib.pyplot as plt
-import plotly.express as px
-
-# heatmap
-def hour_vs_day_heatmap(df):
-    """Altair heatmap - hour of day vs day of week, colored by crash count and injury rate.
+"""Altair heatmap - hour of day vs day of week, colored by crash count and injury rate.
     Saves both heatmaps to a single HTML file.
-    """
+"""
 
+import pandas as pd
+import altair as alt
+
+def create_heatmap(df):
     plot_df = df.copy()
     plot_df['TOTAL_INJURIES'] = plot_df['NUMB_NONFATAL_INJR'] + plot_df['NUMB_FATAL_INJR']
 
@@ -74,5 +70,13 @@ def hour_vs_day_heatmap(df):
     combined = alt.vconcat(crash_count_heatmap, injury_rate_heatmap).resolve_scale(
         color = 'independent'
     )
-    combined.save('hour_vs_day_heatmap.html')
 
+    combined.save('heatmap.html')
+    print('Saved to heatmap.html')
+
+def main():
+    df = pd.read_csv('cleaned_boston_crashes.csv')
+    create_heatmap(df)
+
+if __name__ == '__main__':
+    main()

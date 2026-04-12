@@ -49,7 +49,8 @@ def speed_vs_injuries(df):
         height = 600
     )
 
-    fig.show()
+    fig.write_html('boxplot.html')
+    print('Saved to boxplot.html')
 
 def main():
     df = pd.read_csv('cleaned_boston_crashes.csv')
