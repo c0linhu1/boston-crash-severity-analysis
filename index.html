@@ -142,14 +142,13 @@
     <h2>Introduction</h2>
     <p>
         Motor vehicle crashes remain a leading cause of injury and death in the United States, and Boston is no exception. 
-        Understanding and acknowledging the factors that contribute to crash severity, rather than just crash occurrence 
+        Understanding and acknowledging the factors that contribute to crash severity, rather than just crash occurrence, 
         is important for informing road safety policy and public awareness campaigns. 
         Although many studies have examined crash frequency, few have focused specifically 
         on what makes a given crash more or less severe. 
-
     </p>
     <p>
-        The project will focus on the relationships among environmental and weather conditions and their impacts on crash severity outcomes in Boston. 
+        This project focuses on the relationships among environmental and weather conditions and their impacts on crash severity outcomes in Boston. 
         By analyzing 2025 crash records, we aim to identify and visualize the factor combinations most strongly 
         associated with serious injuries and deaths, providing insights for safety advocates and transportation planners.
     </p>
@@ -186,6 +185,7 @@
     <div class="viz-wide">
         <iframe class="viz-frame" src="stacked_bar.html"></iframe>
     </div>
+    <div class="interact"><strong>Interact:</strong> Hover over any bar segment to see the exact crash count for that weather and severity combination.</div>
     <div class="takeaway"><strong>Takeaway:</strong> Clear weather accounts for the vast majority of crashes, which reflects its dominance in the dataset rather than increased danger. However, when looking at the proportion of severe crashes, Rain and Snow/Ice conditions show a relatively higher share of non-fatal injuries compared to property-damage-only crashes. This suggests that adverse weather conditions, while less common, tend to produce more injurious outcomes when crashes do occur.</div>
 
     <!-- VIZ 2: Heatmap -->
@@ -193,6 +193,7 @@
     <div class="viz-wide">
         <iframe class="viz-frame" src="heatmap.html"></iframe>
     </div>
+    <div class="interact"><strong>Interact:</strong> Click and drag horizontally on the top heatmap to select a range of hours. Click on a row to select a specific day of the week. Both heatmaps are linked — unselected cells will gray out, allowing you to compare crash count and injury rate for the same time window. Click an empty area to reset the selection.</div>
     <div class="takeaway"><strong>Takeaway:</strong> Crash volume peaks during weekday commute hours (7–9 AM and 3–6 PM), with Wednesday and Friday showing the highest counts. Injury rates tell a different story — late night and early morning hours (12–5 AM) on weekends show disproportionately high injury rates despite lower crash volumes, suggesting that while fewer crashes occur overnight, they tend to be more severe.</div>
 
     <!-- VIZ 3: Map -->
@@ -200,33 +201,37 @@
     <div class="viz-wide">
         <iframe class="viz-frame" src="map.html" style="height:640px;"></iframe>
     </div>
-    <div class="interact"><strong>Interact:</strong> Use the dropdowns to filter crashes by weather condition or severity. Hover over any dot to see crash details.</div>
+    <div class="interact"><strong>Interact:</strong> Use the Weather dropdown to filter crashes by weather condition and the Severity dropdown to show only severe or non-severe crashes. Hover over any dot to see detailed crash information including severity, weather, lighting, road surface, time, and speed limit.</div>
+    <div class="takeaway"><strong>Takeaway:</strong> Severe crashes are concentrated along major corridors and intersections throughout Boston, with notable clusters in Downtown, Dorchester, and Roxbury. Filtering by weather reveals that rain-related severe crashes follow similar geographic patterns to clear-weather crashes, suggesting that crash-prone locations remain dangerous regardless of conditions.</div>
 
     <!-- VIZ 4: Grouped Bar -->
     <h2>Severity Rate by Weather and Lighting</h2>
     <div class="viz-wide">
         <iframe class="viz-frame" src="grouped_bar.html"></iframe>
     </div>
-    <div class="takeaway"><strong>Takeaway:</strong> Crash severity rates seem to remain relatively consistent 
-        across the different weather and lighting conditions, as across all conditions the severity 
-        rate ranges from ~30–40%. Something thats interesting that viewers see from this visualization
-        is that clear weather does not seem to correspond to lower severity. Severity rates during 
-        clear conditions are actually comparable to or higher than those during adverse weather.
-        This may suggest that drivers may be more careless when conditions appear safe. Furthermore, Snow/Ice 
-        conditions show the most variation across lighting types. This shows that visibility may play a greater
-        role when road surfaces are already dangerous.</div>
+    <div class="interact"><strong>Interact:</strong> Use the Road Surface dropdown in the top-left corner to filter the chart by road condition (Dry, Wet, Snow/Ice). Hover over any bar to see the total crash count, severe crash count, and severity rate for that weather–lighting combination.</div>
+    <div class="takeaway"><strong>Takeaway:</strong> Crash severity rates remain relatively consistent across different weather and lighting conditions, ranging from roughly 30–40%. Clear weather does not correspond to lower severity — severity rates during clear conditions are comparable to or higher than those during adverse weather, which may suggest that drivers are more careless when conditions appear safe. Snow/Ice conditions show the most variation across lighting types, indicating that visibility may play a greater role when road surfaces are already dangerous.</div>
 
     <!-- VIZ 5: Box Plot -->
     <h2>Injury Distribution by Speed Limit and Weather</h2>
     <div class="viz-wide">
         <iframe class="viz-frame" src="boxplot.html"></iframe>
     </div>
+    <div class="interact"><strong>Interact:</strong> Hover over any box or outlier point to see detailed statistics. Click a weather category in the legend to show or hide it, isolating specific conditions for comparison. Use the Plotly toolbar to zoom into specific speed limit ranges or reset the view.</div>
     <div class="takeaway"><strong>Takeaway:</strong> The majority of crashes across all speed limits result in zero or one injury, with distributions heavily skewed toward zero. Higher speed limit zones (45–65 mph) show more outliers with elevated injury counts, indicating that while rare, crashes at higher speeds tend to produce more injuries when they do occur. Snow/Ice and Rain conditions appear more frequently among high-injury outliers, particularly at mid-range speed limits (30–35 mph) where crash volume is highest.</div>
 
     <!-- CONCLUSION -->
     <h2>Conclusion</h2>
-    <p>[ 2–3 key findings about which environmental factors most contribute to crash severity in Boston.]</p>
-    <p>[limitations and future work.]</p>
+    <p>
+        Our analysis of Boston crash data from January 2025 reveals three key findings about how environmental factors contribute to crash severity. First, adverse weather conditions like rain and snow/ice are associated with a higher proportion of injury-producing crashes relative to their overall crash counts, even though clear weather dominates in total volume. This indicates that while fewer crashes occur in bad weather, those that do happen tend to be more severe. Second, time of day matters more than might be expected — late-night and early-morning crashes on weekends show disproportionately high injury rates despite low crash volumes, likely due to factors such as reduced visibility, fatigue, or impaired driving. Third, severity rates remain surprisingly consistent across lighting and weather combinations (roughly 30–40%), suggesting that no single environmental factor in isolation drives severity; rather, it is the interaction of multiple conditions — such as icy roads combined with poor lighting — that produces the most variation.
+    </p>
+    <p>
+        There are several limitations to this analysis. The dataset covers only January 2025, which limits the seasonal range and may overrepresent winter-specific conditions like snow and ice. The data also lacks driver-level variables such as impairment, distraction, or seatbelt use, which are known contributors to crash severity but are not captured in the MassDOT crash reports at this level. Future work could expand the time range to capture seasonal variation, incorporate driver behavior data, and apply statistical modeling to quantify the relative contribution of each environmental factor to severity outcomes.
+    </p>
+
+    <footer>
+        DS4200 — Information Presentation and Data Visualization &middot; Northeastern University &middot; Spring 2025
+    </footer>
 
 </body>
 </html>
