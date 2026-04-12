@@ -156,9 +156,9 @@
     <!-- DATA -->
     <h2>Data</h2>
     <p>
-        Our dataset consists of motor vehicle crash records from Boston during January 2025, sourced from the
+        Our dataset consists of motor vehicle crash records from Boston covering January through October 2025, sourced from the
         <a href="https://apps.crashdata.dot.mass.gov/cdp/home" target="_blank">MassDOT crash database</a>.
-        After cleaning, the dataset contains approximately 3,500 observations with 23 features including crash severity,
+        After cleaning, the dataset contains 2,947 observations with 23 features including crash severity,
         weather, road surface, lighting, time of day, collision type, speed limit, and geographic coordinates.
     </p>
     <p>
@@ -223,10 +223,10 @@
     <!-- CONCLUSION -->
     <h2>Conclusion</h2>
     <p>
-        Our analysis of Boston crash data from January 2025 reveals three key findings about how environmental factors contribute to crash severity. First, adverse weather conditions like rain and snow/ice are associated with a higher proportion of injury-producing crashes relative to their overall crash counts, even though clear weather dominates in total volume. This indicates that while fewer crashes occur in bad weather, those that do happen tend to be more severe. Second, time of day matters more than might be expected — late-night and early-morning crashes on weekends show disproportionately high injury rates despite low crash volumes, likely due to factors such as reduced visibility, fatigue, or impaired driving. Third, severity rates remain surprisingly consistent across lighting and weather combinations (roughly 30–40%), suggesting that no single environmental factor in isolation drives severity; rather, it is the interaction of multiple conditions — such as icy roads combined with poor lighting — that produces the most variation.
+        Overall, our analysis of Boston crash data from January to October 2025 reveals three key findings about how environmental factors contribute to crash severity. The first finding is how adverse weather conditions like rain and snow or ice are associated with a higher proportion of injury-producing crashes relative to their overall crash counts, even though clear weather dominates in total volume. This shows that while fewer crashes occur in bad weather, those that do happen tend to be more severe. The second finding is that the time of day matters more than might be expected. We see that late night and early morning crashes over the weekends show disproportionately high injury rates despite low crash volumes. This is very likely due to factors such as reduced visibility or fatigue. The last finding was how severity rates remain surprisingly consistent across lighting and weather combinations. The severity rates across the different lightning and weather combinations mostly sat around the 30–40% interval, demonstrating that no single environmental factor in isolation drives severity. Instead it is actually multiple conditions interacting with each other, an example of this being icy roads combined with poor lighting, that produces the most variation.
     </p>
     <p>
-        There are several limitations to this analysis. The dataset covers only January 2025, which limits the seasonal range and may overrepresent winter-specific conditions like snow and ice. The data also lacks driver-level variables such as impairment, distraction, or seatbelt use, which are known contributors to crash severity but are not captured in the MassDOT crash reports at this level. Future work could expand the time range to capture seasonal variation, incorporate driver behavior data, and apply statistical modeling to quantify the relative contribution of each environmental factor to severity outcomes.
+        We have also noticed several limitations to our analysis. One of them being the dataset and while it spans January through October 2025, is only sourced from a single year and may not capture longer term trends or year-over-year variation in crash patterns. Furthermore, the data also lacks other driver level variables such as impairment, seatbelt use, etc. which are other known contributors to crash severity but are not captured in the MassDOT crash reports at this level. Additionally, the cleaning process removed a significant number of records with unreported weather, road surface, or lighting conditions, which may introduce selection bias if those missing values are not randomly distributed. Future work could incorporate multi-year data for trend analysis and apply statistical modeling in order to quantify the relative contribution of each environmental factor to the severity outcomes.
     </p>
 
     <footer>
