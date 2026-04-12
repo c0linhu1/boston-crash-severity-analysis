@@ -183,18 +183,24 @@
 
     <!-- VIZ 1: Stacked Bar -->
     <h2>Crash Severity Breakdown by Weather</h2>
-    <div class="placeholder">Stacked Bar Chart</div>
+    <div class="viz-wide">
+        <iframe class="viz-frame" src="stacked_bar.html"></iframe>
+    </div>
+    <div class="takeaway"><strong>Takeaway:</strong> Clear weather accounts for the vast majority of crashes, which reflects its dominance in the dataset rather than increased danger. However, when looking at the proportion of severe crashes, Rain and Snow/Ice conditions show a relatively higher share of non-fatal injuries compared to property-damage-only crashes. This suggests that adverse weather conditions, while less common, tend to produce more injurious outcomes when crashes do occur.</div>
 
     <!-- VIZ 2: Heatmap -->
     <h2>Crash Frequency by Hour and Day of Week</h2>
     <div class="viz-wide">
         <iframe class="viz-frame" src="heatmap.html"></iframe>
     </div>
-    <div class="takeaway"><strong>Takeaway:</strong> [To be added]</div>
+    <div class="takeaway"><strong>Takeaway:</strong> Crash volume peaks during weekday commute hours (7–9 AM and 3–6 PM), with Wednesday and Friday showing the highest counts. Injury rates tell a different story — late night and early morning hours (12–5 AM) on weekends show disproportionately high injury rates despite lower crash volumes, suggesting that while fewer crashes occur overnight, they tend to be more severe.</div>
 
     <!-- VIZ 3: Map -->
     <h2>Geographic Distribution of Severe Crashes</h2>
-    <div class="placeholder">Interactive Map</div>
+    <div class="viz-wide">
+        <iframe class="viz-frame" src="map.html" style="height:640px;"></iframe>
+    </div>
+    <div class="interact"><strong>Interact:</strong> Use the dropdowns to filter crashes by weather condition or severity. Hover over any dot to see crash details.</div>
 
     <!-- VIZ 4: Grouped Bar -->
     <h2>Severity Rate by Weather and Lighting</h2>
@@ -215,7 +221,7 @@
     <div class="viz-wide">
         <iframe class="viz-frame" src="boxplot.html"></iframe>
     </div>
-    <div class="takeaway"><strong>Takeaway:</strong> [To be added]</div>
+    <div class="takeaway"><strong>Takeaway:</strong> The majority of crashes across all speed limits result in zero or one injury, with distributions heavily skewed toward zero. Higher speed limit zones (45–65 mph) show more outliers with elevated injury counts, indicating that while rare, crashes at higher speeds tend to produce more injuries when they do occur. Snow/Ice and Rain conditions appear more frequently among high-injury outliers, particularly at mid-range speed limits (30–35 mph) where crash volume is highest.</div>
 
     <!-- CONCLUSION -->
     <h2>Conclusion</h2>

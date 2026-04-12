@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Crash Severity Map</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fff;
+            color: #222;
+        }
+
+        #controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e8e8e8;
+            flex-wrap: wrap;
+        }
+
+        #controls label {
+            font-size: 0.85rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        #controls select {
+            margin-left: 0.4rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        #crash-count {
+            font-size: 0.85rem;
+            color: #888;
+            margin-left: auto;
+        }
+
+        #map-container {
+            position: relative;
+            width: 100%;
+            height: 580px;
+            background: #e8f0f7;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .crash-dot {
+            opacity: 0.72;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+
+        .crash-dot:hover {
+            opacity: 1;
+            stroke: #222;
+            stroke-width: 1px;
+        }
+
+        #tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 5px;
+            padding: 0.6rem 0.85rem;
+            font-size: 0.8rem;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            max-width: 220px;
+            line-height: 1.6;
+        }
+
+        #tooltip strong {
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        #legend {
+            display: flex;
+            gap: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            background: #f9f9f9;
+            border-top: 1px solid #e8e8e8;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #legend span {
+            font-size: 0.8rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <label>
+        Weather:
+        <select id="weather-filter">
+            <option value="All">All Weather</option>
+            <option value="Clear">Clear</option>
+            <option value="Rain">Rain</option>
+            <option value="Snow/Ice">Snow/Ice</option>
+            <option value="Cloudy">Cloudy</option>
+            <option value="Fog">Fog</option>
+        </select>
+    </label>
+    <label>
+        Severity:
+        <select id="severity-filter">
+            <option value="All">All Crashes</option>
+            <option value="1">Severe Only</option>
+            <option value="0">Non-Severe Only</option>
+        </select>
+    </label>
+    <span id="crash-count"></span>
+</div>
+
+<div id="map-container">
+    <svg id="map"></svg>
+    <div id="tooltip"></div>
+</div>
+
+<div id="legend">
+    <span><span class="legend-dot" style="background: #c23b22;"></span> Severe (Injury / Fatal)</span>
+    <span><span class="legend-dot" style="background: #2c7bb6;"></span> Non-Severe (Property Damage Only)</span>
+</div>
+
+<script>
+    // color by severity - matches project color scheme
+    const SEVERE_COLOR   = '#c23b22';
+    const NONSEVERE_COLOR = '#2c7bb6';
+
+    const svg = d3.select('#map');
+    const tooltip = d3.select('#tooltip');
+    const container = document.getElementById('map-container');
+
+    let allData = [];
+    let projection;
+    let path;
+
+    // load crash data from embedded CSV
+    d3.csv('cleaned_boston_crashes.csv').then(raw => {
+
+        allData = raw
+            .filter(d => d.LAT && d.LON && !isNaN(+d.LAT) && !isNaN(+d.LON))
+            .map(d => ({
+                lat: +d.LAT,
+                lon: +d.LON,
+                is_severe: +d.IS_SEVERE,
+                weather: d.WEATHER_SIMPLE,
+                lighting: d.LIGHTING_SIMPLE,
+                road: d.ROAD_SIMPLE,
+                hour: +d.HOUR,
+                day: d.DAY_OF_WEEK,
+                severity_descr: d.CRASH_SEVERITY_DESCR,
+                speed_limit: d.SPEED_LIMIT || 'N/A'
+            }));
+
+        setupProjection();
+        render(allData);
+        updateCount(allData.length);
+
+    }).catch(err => {
+        console.error('Error loading CSV:', err);
+        document.getElementById('map-container').innerHTML =
+            '<p style="padding:2rem;color:#888;">Could not load cleaned_boston_crashes.csv — make sure it is in the same folder.</p>';
+    });
+
+    function setupProjection() {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+
+        // center on Boston
+        projection = d3.geoMercator()
+            .center([-71.0589, 42.3201])
+            .scale(95000)
+            .translate([w / 2, h / 2]);
+
+        path = d3.geoPath().projection(projection);
+    }
+
+    function render(data) {
+        svg.selectAll('.crash-dot').remove();
+
+        svg.selectAll('.crash-dot')
+            .data(data)
+            .enter()
+            .append('circle')
+            .attr('class', 'crash-dot')
+            .attr('cx', d => projection([d.lon, d.lat])[0])
+            .attr('cy', d => projection([d.lon, d.lat])[1])
+            .attr('r', 4)
+            .attr('fill', d => d.is_severe === 1 ? SEVERE_COLOR : NONSEVERE_COLOR)
+            .on('mouseover', function(event, d) {
+                const hourFmt = d.hour === 0 ? '12 AM' :
+                    d.hour < 12 ? d.hour + ' AM' :
+                    d.hour === 12 ? '12 PM' : (d.hour - 12) + ' PM';
+
+                tooltip
+                    .style('opacity', 1)
+                    .html(`
+                        <strong>${d.is_severe === 1 ? '🔴 Severe' : '🔵 Non-Severe'}</strong>
+                        <b>Severity:</b> ${d.severity_descr}<br>
+                        <b>Weather:</b> ${d.weather}<br>
+                        <b>Lighting:</b> ${d.lighting}<br>
+                        <b>Road:</b> ${d.road}<br>
+                        <b>Time:</b> ${d.day}, ${hourFmt}<br>
+                        <b>Speed Limit:</b> ${d.speed_limit} mph
+                    `);
+            })
+            .on('mousemove', function(event) {
+                const rect = container.getBoundingClientRect();
+                let x = event.clientX - rect.left + 12;
+                let y = event.clientY - rect.top - 10;
+
+                // keep tooltip inside container
+                if (x + 230 > rect.width) x -= 245;
+                if (y + 160 > rect.height) y -= 150;
+
+                tooltip.style('left', x + 'px').style('top', y + 'px');
+            })
+            .on('mouseout', function() {
+                tooltip.style('opacity', 0);
+            });
+    }
+
+    function applyFilters() {
+        const weather  = document.getElementById('weather-filter').value;
+        const severity = document.getElementById('severity-filter').value;
+
+        const filtered = allData.filter(d => {
+            const wMatch = weather  === 'All' || d.weather   === weather;
+            const sMatch = severity === 'All' || String(d.is_severe) === severity;
+            return wMatch && sMatch;
+        });
+
+        render(filtered);
+        updateCount(filtered.length);
+    }
+
+    function updateCount(n) {
+        document.getElementById('crash-count').textContent = n.toLocaleString() + ' crashes shown';
+    }
+
+    document.getElementById('weather-filter').addEventListener('change', applyFilters);
+    document.getElementById('severity-filter').addEventListener('change', applyFilters);
+
+    // re-render on window resize
+    window.addEventListener('resize', () => {
+        setupProjection();
+        applyFilters();
+    });
+</script>
+</body>
+</html>
