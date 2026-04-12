@@ -93,7 +93,11 @@ def create_grouped_bar():
             y=0.98,
             yanchor='top'
         ),
-        xaxis_title='Weather Condition',
+        xaxis=dict(
+            title='Weather Condition',
+            categoryorder='array',
+            categoryarray=weather_order
+        ),
         yaxis_title='Severity Rate (%)',
         barmode='group',
         font=dict(size=12),
@@ -101,7 +105,7 @@ def create_grouped_bar():
         width=1000,
         plot_bgcolor='white',
         legend_title_text='Lighting Condition',
-        yaxis=dict(range=[0, 100]),
+        yaxis=dict(autorange=True),
         margin=dict(t=120, b=60, l=70, r=70),
         updatemenus=[
             dict(
