@@ -126,7 +126,7 @@ def create_grouped_bar():
         annotations=[
             dict(
                 text='Road Surface:',
-                x=0.01, y=1.13,
+                x=0.01, y=1.05,
                 xref='paper', yref='paper',
                 showarrow=False,
                 font=dict(size=10, color='#555'),
