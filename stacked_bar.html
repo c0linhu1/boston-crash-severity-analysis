@@ -7,6 +7,7 @@
       width: 100%;
       display: flex;
     }
+
     #vis.vega-embed details,
     #vis.vega-embed details summary {
       position: relative;
@@ -20,76 +21,10 @@
   <div id="vis"></div>
   <script>
     (function(vegaEmbed) {
-      var spec = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
-        "config": {
-          "view": { "continuousWidth": 300, "continuousHeight": 300 }
-        },
-        "data": {
-          "values": [
-            { "WEATHER_SIMPLE": "Clear",    "CRASH_SEVERITY_DESCR": "Fatal injury",                          "count": 4 },
-            { "WEATHER_SIMPLE": "Clear",    "CRASH_SEVERITY_DESCR": "Non-fatal injury",                      "count": 825 },
-            { "WEATHER_SIMPLE": "Clear",    "CRASH_SEVERITY_DESCR": "Property damage only (none injured)",   "count": 1536 },
-            { "WEATHER_SIMPLE": "Cloudy",   "CRASH_SEVERITY_DESCR": "Non-fatal injury",                      "count": 65 },
-            { "WEATHER_SIMPLE": "Cloudy",   "CRASH_SEVERITY_DESCR": "Property damage only (none injured)",   "count": 142 },
-            { "WEATHER_SIMPLE": "Rain",     "CRASH_SEVERITY_DESCR": "Fatal injury",                          "count": 2 },
-            { "WEATHER_SIMPLE": "Rain",     "CRASH_SEVERITY_DESCR": "Non-fatal injury",                      "count": 98 },
-            { "WEATHER_SIMPLE": "Rain",     "CRASH_SEVERITY_DESCR": "Property damage only (none injured)",   "count": 199 },
-            { "WEATHER_SIMPLE": "Snow/Ice", "CRASH_SEVERITY_DESCR": "Non-fatal injury",                      "count": 11 },
-            { "WEATHER_SIMPLE": "Snow/Ice", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)",   "count": 34 },
-            { "WEATHER_SIMPLE": "Fog",      "CRASH_SEVERITY_DESCR": "Non-fatal injury",                      "count": 2 },
-            { "WEATHER_SIMPLE": "Fog",      "CRASH_SEVERITY_DESCR": "Property damage only (none injured)",   "count": 1 }
-          ]
-        },
-        "mark": { "type": "bar" },
-        "encoding": {
-          "x": {
-            "field": "WEATHER_SIMPLE",
-            "type": "ordinal",
-            "title": "Weather Condition",
-            "sort": ["Clear", "Cloudy", "Rain", "Snow/Ice", "Fog"],
-            "axis": { "labelAngle": 0, "labelFontSize": 12, "titleFontSize": 13 }
-          },
-          "y": {
-            "field": "count",
-            "type": "quantitative",
-            "title": "Number of Crashes",
-            "stack": "zero",
-            "axis": { "labelFontSize": 11, "titleFontSize": 13 }
-          },
-          "color": {
-            "field": "CRASH_SEVERITY_DESCR",
-            "type": "nominal",
-            "title": "Crash Severity",
-            "sort": ["Fatal injury", "Non-fatal injury", "Property damage only (none injured)"],
-            "scale": {
-              "domain": ["Fatal injury", "Non-fatal injury", "Property damage only (none injured)"],
-              "range":  ["#c23b22",      "#f4a261",          "#2c7bb6"]
-            },
-            "legend": { "labelFontSize": 11, "titleFontSize": 12 }
-          },
-          "order": {
-            "field": "CRASH_SEVERITY_DESCR",
-            "sort": "descending"
-          },
-          "tooltip": [
-            { "field": "WEATHER_SIMPLE",         "type": "ordinal",      "title": "Weather" },
-            { "field": "CRASH_SEVERITY_DESCR",   "type": "nominal",      "title": "Severity" },
-            { "field": "count",                  "type": "quantitative", "title": "Crash Count" }
-          ]
-        },
-        "title": {
-          "text": "Crash Severity Breakdown by Weather Condition (Boston, Jan 2025)",
-          "fontSize": 16,
-          "anchor": "middle"
-        },
-        "width": 600,
-        "height": 400
-      };
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-b65513a782bd4f91fd09af84d5ce8034"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "CRASH_SEVERITY_DESCR", "legend": {"labelFontSize": 11, "titleFontSize": 12}, "scale": {"domain": ["Fatal injury", "Non-fatal injury", "Property damage only (none injured)"], "range": ["#c23b22", "#f4a261", "#2c7bb6"]}, "sort": ["Fatal injury", "Non-fatal injury", "Property damage only (none injured)"], "title": "Crash Severity", "type": "nominal"}, "order": {"field": "CRASH_SEVERITY_DESCR", "sort": "descending", "type": "nominal"}, "tooltip": [{"field": "WEATHER_SIMPLE", "title": "Weather", "type": "ordinal"}, {"field": "CRASH_SEVERITY_DESCR", "title": "Severity", "type": "nominal"}, {"field": "count", "title": "Crash Count", "type": "quantitative"}], "x": {"axis": {"labelAngle": 0, "labelFontSize": 12, "titleFontSize": 13}, "field": "WEATHER_SIMPLE", "sort": ["Clear", "Cloudy", "Rain", "Snow/Ice", "Fog"], "title": "Weather Condition", "type": "ordinal"}, "y": {"axis": {"labelFontSize": 11, "titleFontSize": 13}, "field": "count", "stack": "zero", "title": "Number of Crashes", "type": "quantitative"}}, "height": 400, "title": {"text": "Crash Severity Breakdown by Weather Condition (Boston, 2025)", "anchor": "middle", "fontSize": 16}, "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-b65513a782bd4f91fd09af84d5ce8034": [{"WEATHER_SIMPLE": "Clear", "CRASH_SEVERITY_DESCR": "Fatal injury", "count": 4}, {"WEATHER_SIMPLE": "Clear", "CRASH_SEVERITY_DESCR": "Non-fatal injury", "count": 825}, {"WEATHER_SIMPLE": "Clear", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)", "count": 1536}, {"WEATHER_SIMPLE": "Cloudy", "CRASH_SEVERITY_DESCR": "Non-fatal injury", "count": 65}, {"WEATHER_SIMPLE": "Cloudy", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)", "count": 142}, {"WEATHER_SIMPLE": "Fog", "CRASH_SEVERITY_DESCR": "Non-fatal injury", "count": 2}, {"WEATHER_SIMPLE": "Fog", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)", "count": 1}, {"WEATHER_SIMPLE": "Rain", "CRASH_SEVERITY_DESCR": "Fatal injury", "count": 2}, {"WEATHER_SIMPLE": "Rain", "CRASH_SEVERITY_DESCR": "Non-fatal injury", "count": 98}, {"WEATHER_SIMPLE": "Rain", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)", "count": 199}, {"WEATHER_SIMPLE": "Snow/Ice", "CRASH_SEVERITY_DESCR": "Non-fatal injury", "count": 11}, {"WEATHER_SIMPLE": "Snow/Ice", "CRASH_SEVERITY_DESCR": "Property damage only (none injured)", "count": 34}]}};
+      var embedOpt = {"mode": "vega-lite"};
 
-      var embedOpt = { "mode": "vega-lite" };
-
-      function showError(el, error) {
+      function showError(el, error){
           el.innerHTML = ('<div style="color:red;">'
                           + '<p>JavaScript Error: ' + error.message + '</p>'
                           + "<p>This usually means there's a typo in your chart specification. "
@@ -97,11 +32,12 @@
                           + '</div>');
           throw error;
       }
-
       const el = document.getElementById('vis');
       vegaEmbed("#vis", spec, embedOpt)
         .catch(error => showError(el, error));
     })(vegaEmbed);
+
   </script>
 </body>
 </html>
+
